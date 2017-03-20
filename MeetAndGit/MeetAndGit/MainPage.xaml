@@ -4,5 +4,61 @@
 			 xmlns:local="clr-namespace:MeetAndGit"
 			 x:Class="MeetAndGit.MainPage">
 
-	
+	<ContentPage.Padding>
+		<OnPlatform x:TypeArguments="Thickness"
+					iOS="10, 20, 10, 0"
+					Android="10, 0"
+					WinPhone="10, 0" />
+	</ContentPage.Padding>
+
+	<StackLayout>
+		<!--Entry StackLayout-->
+		<StackLayout Orientation="Horizontal">
+			<StackLayout.Resources>
+				<ResourceDictionary>
+					<Style TargetType="Entry">
+						<Setter Property="HorizontalOptions" Value="FillAndExpand" />
+					</Style>
+				</ResourceDictionary>
+			</StackLayout.Resources>
+
+			<Entry x:Name="locationEntry" 
+				Placeholder="Location" />
+
+			<Entry x:Name="languageEntry"
+				   Placeholder="Language" />
+		</StackLayout>
+
+		<!--Search Button-->
+		<Button x:Name="searchBtn"
+				Text="Search"
+				VerticalOptions="Center" />
+
+		<!--Search result view-->
+		<ScrollView VerticalOptions="FillAndExpand">
+			<!--result StackLayout-->
+			<StackLayout>
+
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Maroon" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Pink" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Purple" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Red" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Silver" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Teal" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Yellow" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Gray" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Fuchsia" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Black" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Aqua" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Blue" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Gray" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Lime" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Navy" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Olive" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Orange" />
+				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="White" />
+			</StackLayout>
+		</ScrollView>
+	</StackLayout>
+
 </ContentPage>
