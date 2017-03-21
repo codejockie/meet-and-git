@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace MeetAndGit.Data
@@ -11,18 +12,16 @@ namespace MeetAndGit.Data
     public class RestService : IRestService
     {
         HttpClient client;
-        public List<User> Users { get; private set; }
+        public Users Users { get; private set; }
 
         public RestService()
         {
             client = new HttpClient();
-            client.MaxResponseContentBufferSize = 25600;
+            client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Fiddler");
         }
 
-        public async Task<List<User>> GetDataAsync(string location, string language)
+        public async Task<List<Item>> GetDataAsync(string location, string language)
         {
-            Users = new List<User>();
-
             // RestUrl = https://api.github.com/search
 
             var uri = new Uri(string.Format(Constants.RestUrl, $"users?q=location:{location}+language:{language}"));
@@ -34,7 +33,7 @@ namespace MeetAndGit.Data
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Users = JsonConvert.DeserializeObject<List<User>>(content);
+                    Users = JsonConvert.DeserializeObject<Users>(content);
                 }
 
             }
@@ -43,7 +42,7 @@ namespace MeetAndGit.Data
                 Debug.WriteLine(@"ERROR {0}", ex.Message);
             }
 
-            return Users;
+            return Users.Items;
         }
     }
 }

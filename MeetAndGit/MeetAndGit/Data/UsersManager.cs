@@ -16,7 +16,7 @@ namespace MeetAndGit.Data
             _restService = service;
         }
 
-        public Task<List<User>> GetUsersAsync(string location, string language)
+        public Task<List<Item>> GetUsersAsync(string location, string language)
         {
             return _restService.GetDataAsync(location, language);
         }

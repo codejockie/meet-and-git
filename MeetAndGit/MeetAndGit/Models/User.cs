@@ -1,24 +1,32 @@
-﻿namespace MeetAndGit.Models
+﻿using System.Collections.Generic;
+
+namespace MeetAndGit.Models
 {
-    public class User
+    public class Users
+    {
+        public int Total_Count { get; set; }
+        public bool Incomplete_Results { get; set; }
+        public List<Item> Items { get; set; }
+    }
+    public class Item
     {
         public string Login { get; set; }
         public int Id { get; set; }
-        public string AvatarUrl { get; set; }
-        public string GravatarId { get; set; }
+        public string Avatar_Url { get; set; }
+        public string Gravatar_Id { get; set; }
         public string Url { get; set; }
-        public string HtmlUrl { get; set; }
-        public string FollowersUrl { get; set; }
-        public string FollowingUrl { get; set; }
-        public string GistsUrl { get; set; }
-        public string StarredUrl { get; set; }
-        public string SubscriptionsUrl { get; set; }
-        public string OrganisationsUrl { get; set; }
-        public string ReposUrl { get; set; }
-        public string EventsUrl { get; set; }
-        public string ReceivedEventsUrl { get; set; }
+        public string Html_Url { get; set; }
+        public string Followers_Url { get; set; }
+        public string Following_Url { get; set; }
+        public string Gists_Url { get; set; }
+        public string Starred_Url { get; set; }
+        public string Subscriptions_Url { get; set; }
+        public string Organizations_Url { get; set; }
+        public string Repos_Url { get; set; }
+        public string Events_Url { get; set; }
+        public string Received_Events_Url { get; set; }
         public string Type { get; set; }
-        public bool SiteAdmin { get; set; }
+        public bool Site_Admin { get; set; }
         public double Score { get; set; }
     }
 }

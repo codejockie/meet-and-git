@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:MeetAndGit"
+			 x:Class="MeetAndGit.MainPage"
+             Title="Meet and Git">
+
+	<ContentPage.Padding>
+		<OnPlatform x:TypeArguments="Thickness"
+					iOS="10, 20, 10, 0"
+					Android="10, 0"
+					WinPhone="10, 0" />
+	</ContentPage.Padding>
+
+	<StackLayout>
+		<!--Entry StackLayout-->
+		<StackLayout Orientation="Horizontal">
+			<StackLayout.Resources>
+				<ResourceDictionary>
+					<Style TargetType="Entry">
+						<Setter Property="HorizontalOptions" Value="FillAndExpand" />
+					</Style>
+				</ResourceDictionary>
+			</StackLayout.Resources>
+
+            <Entry x:Name="locEntry" 
+				Placeholder="Location" />
+
+            <Entry x:Name="langEntry"
+				   Placeholder="Language" />
+		</StackLayout>
+
+		<!--Search Button-->
+		<Button x:Name="searchBtn"
+				Text="Search"
+				VerticalOptions="Center" Clicked="searchBtn_Clicked" />
+
+        <!--Search result view-->
+        <ListView x:Name="listView"
+                  SeparatorVisibility="None">
+            <ListView.RowHeight>
+                <OnPlatform x:TypeArguments="x:Int32" iOS="80" Android="80" WinPhone="90" />
+            </ListView.RowHeight>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView Padding="5">
+                            <Frame OutlineColor="Accent"
+                                   Padding="10">
+                                <Image Source="{Binding Path=Avatar_Url}"
+                                       HeightRequest="50"
+                                       WidthRequest="50" />
+                            </Frame>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
