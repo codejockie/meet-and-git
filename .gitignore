@@ -240,3 +240,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/MeetAndGit/MeetAndGit/result.json
+/MeetAndGit/MeetAndGit/githubapiresult.json

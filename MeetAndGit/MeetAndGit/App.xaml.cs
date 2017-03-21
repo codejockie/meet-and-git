@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeetAndGit.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +10,15 @@ namespace MeetAndGit
 {
     public partial class App : Application
     {
+        public static UsersManager UserManager { get; set; }
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MeetAndGit.MainPage();
+            UserManager = new UsersManager(new RestService());
+
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:local="clr-namespace:MeetAndGit"
-			 x:Class="MeetAndGit.MainPage">
+			 x:Class="MeetAndGit.MainPage"
+             Title="Meet and Git">
 
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
@@ -34,31 +35,7 @@
 				Text="Search"
 				VerticalOptions="Center" />
 
-		<!--Search result view-->
-		<ScrollView VerticalOptions="FillAndExpand">
-			<!--result StackLayout-->
-			<StackLayout>
-
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Maroon" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Pink" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Purple" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Red" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Silver" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Teal" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Yellow" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Gray" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Fuchsia" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Black" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Aqua" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Blue" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Gray" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Lime" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Navy" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Olive" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="Orange" />
-				<Frame OutlineColor="Accent" HeightRequest="20" BackgroundColor="White" />
-			</StackLayout>
-		</ScrollView>
+		
 	</StackLayout>
 
 </ContentPage>
