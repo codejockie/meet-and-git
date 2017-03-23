@@ -8,7 +8,7 @@ namespace MeetAndGit
 {
     public static class Constants
     {
-        public static string RestUrl = "https://api.github.com/search/{0}";
+        public static string RestUrl = "https://api.github.com/{0}";
         public static string Token = "396726f8d3f0b9d9670e4059993ec9489937136c";
     }
 }

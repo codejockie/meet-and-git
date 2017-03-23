@@ -13,6 +13,7 @@ namespace MeetAndGit.Data
     {
         HttpClient client;
         public Users Users { get; private set; }
+        public UserInfo UserInfo { get; set; }
 
         public RestService()
         {
@@ -20,11 +21,11 @@ namespace MeetAndGit.Data
             client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Fiddler");
         }
 
-        public async Task<List<Item>> GetDataAsync(string location, string language)
+        public async Task<List<User>> GetDataAsync(string location, string language)
         {
             // RestUrl = https://api.github.com/search
 
-            var uri = new Uri(string.Format(Constants.RestUrl, $"users?q=location:{location}+language:{language}"));
+            var uri = new Uri(string.Format(Constants.RestUrl, $"search/users?q=location:{location}+language:{language}"));
 
             try
             {
@@ -43,6 +44,29 @@ namespace MeetAndGit.Data
             }
 
             return Users.Items;
+        }
+
+        public async Task<UserInfo> GetUserInfoAsync(string username)
+        {
+            var uri = new Uri(string.Format(Constants.RestUrl, $"users/{username}"));
+
+            try
+            {
+                var response = await client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    UserInfo = JsonConvert.DeserializeObject<UserInfo>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return UserInfo;
         }
     }
 }

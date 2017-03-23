@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helper="clr-namespace:MeetAndGit.Helpers"
+             x:Class="MeetAndGit.Views.DetailsPage"
+             Title="{Binding Name,
+                Converter={StaticResource Key=stringToTitle}}}"
+             SizeChanged="OnPageSizeChanged">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helper:StringToTitleConverter x:Key="stringToTitle" />
+
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Italic" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="10, 20, 10, 20"
+                    Android="10, 0, 10, 20"
+                    WinPhone="10, 0, 10, 20" />
+    </ContentPage.Padding>
+
+    <Grid x:Name="mainGrid">
+        <!-- Initialized for portrait mode. -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0" />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="{Binding Avatar_Url}"
+               Grid.Row="0" Grid.Column="0" />
+
+        <ScrollView x:Name="detailsStack"
+                    Grid.Row="1" Grid.Column="0">
+            <StackLayout>
+                <Label Text="{Binding Name, 
+                                  StringFormat='Name: {0}',
+                                  Converter={StaticResource Key=stringToTitle}}" />
+                <Label Text="{Binding Login, StringFormat='Username: {0}'}" />
+                <Label Text="{Binding Email, StringFormat='Email: {0}' }" />
+                <Label Text="{Binding Location, StringFormat='Location: {0}' }" />
+                <Label Text="{Binding Company, StringFormat='Company: {0}' }" />
+                <Label Text="{Binding Blog, StringFormat='Blog: {0}' }" />
+                <Label Text="{Binding Bio, StringFormat='Bio: {0}' }" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

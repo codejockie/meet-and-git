@@ -6,9 +6,9 @@ namespace MeetAndGit.Models
     {
         public int Total_Count { get; set; }
         public bool Incomplete_Results { get; set; }
-        public List<Item> Items { get; set; }
+        public List<User> Items { get; set; }
     }
-    public class Item
+    public class User
     {
         public string Login { get; set; }
         public int Id { get; set; }
