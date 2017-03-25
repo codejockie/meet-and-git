@@ -1,10 +1,6 @@
 ﻿using MeetAndGit.Models;
 using MeetAndGit.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MeetAndGit
@@ -18,24 +14,49 @@ namespace MeetAndGit
 
         private async void OnButtonClicked(object sender, EventArgs e)
         {
-            if (locEntry.Text != string.Empty && langEntry.Text != string.Empty)
-            {
-                var loc = locEntry.Text.Trim();
-                var lang = langEntry.Text.Trim();
+            activityIndicator.IsVisible = true;
+            activityIndicator.IsRunning = true;
+            searchBtn.IsEnabled = false;
 
+            string errorMessage = null;
+            var loc = locEntry.Text.Trim();
+            var lang = langEntry.Text.Trim();
+
+            try
+            {
                 listView.ItemsSource = await App.UserManager.GetUsersAsync(loc, lang);
+
+                activityIndicator.IsRunning = false;
+                activityIndicator.IsVisible = false;
+                searchBtn.IsEnabled = true;
+            }
+            catch (Exception exc)
+            {
+                errorMessage = exc.Message;
             }
         }
 
-        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var user = e.SelectedItem as User;
+            string errorMessage = null;
 
-            DetailsPage detailsPage = new DetailsPage();
-            var userInfo = await App.UserManager.GetUserAsync(user.Login);
-            detailsPage.BindingContext = userInfo;
+            if (args.SelectedItem != null)
+            {
+                ((ListView)sender).SelectedItem = null;
+                var user = args.SelectedItem as User;
 
-            await Navigation.PushAsync(detailsPage);
+                DetailsPage detailsPage = new DetailsPage();
+                try
+                {
+                    detailsPage.BindingContext = await App.UserManager.GetUserAsync(user.Login);
+                }
+                catch (Exception exc)
+                {
+                    errorMessage = exc.Message;
+                }
+
+                await Navigation.PushAsync(detailsPage);
+            }
         }
     }
 }

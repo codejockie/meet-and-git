@@ -21,49 +21,44 @@ namespace MeetAndGit.Data
             client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Fiddler");
         }
 
+        /// <summary>
+        /// Gets a list of users based on their location and programming language
+        /// </summary>
+        /// <param name="location">Location</param>
+        /// <param name="language">Programming Language</param>
+        /// <returns>Returns a list of users</returns>
         public async Task<List<User>> GetDataAsync(string location, string language)
         {
-            // RestUrl = https://api.github.com/search
+            // RestUrl = https://api.github.com/
 
             var uri = new Uri(string.Format(Constants.RestUrl, $"search/users?q=location:{location}+language:{language}"));
 
-            try
-            {
-                var response = await client.GetAsync(uri);
+            var response = await client.GetAsync(uri);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    Users = JsonConvert.DeserializeObject<Users>(content);
-                }
-
-            }
-            catch (Exception ex)
+            if (response.IsSuccessStatusCode)
             {
-                Debug.WriteLine(@"ERROR {0}", ex.Message);
+                var content = await response.Content.ReadAsStringAsync();
+                Users = JsonConvert.DeserializeObject<Users>(content);
             }
 
             return Users.Items;
         }
 
+        /// <summary>
+        /// Gets a specified user's details by their username
+        /// </summary>
+        /// <param name="username">Username for a user</param>
+        /// <returns>UserInfo</returns>
         public async Task<UserInfo> GetUserInfoAsync(string username)
         {
             var uri = new Uri(string.Format(Constants.RestUrl, $"users/{username}"));
 
-            try
-            {
-                var response = await client.GetAsync(uri);
+            var response = await client.GetAsync(uri);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    UserInfo = JsonConvert.DeserializeObject<UserInfo>(content);
-                }
-            }
-            catch (Exception ex)
+            if (response.IsSuccessStatusCode)
             {
-
-                throw;
+                var content = await response.Content.ReadAsStringAsync();
+                UserInfo = JsonConvert.DeserializeObject<UserInfo>(content);
             }
 
             return UserInfo;

@@ -26,7 +26,11 @@
 				<ResourceDictionary>
 					<Style TargetType="Entry">
 						<Setter Property="HorizontalOptions" Value="FillAndExpand" />
-					</Style>
+                    </Style>
+                    
+                    <Style TargetType="Image">
+                        <Setter Property="VerticalOptions" Value="Center" />
+                    </Style>
                 </ResourceDictionary>
 			</StackLayout.Resources>
 
@@ -42,17 +46,18 @@
 				Text="Search"
 				VerticalOptions="Center"
                 Clicked="OnButtonClicked" 
-                IsEnabled="{Binding Source={x:Reference locEntry}, 
+                IsEnabled="{Binding Source={x:Reference langEntry}, 
                                     Path=Text.Length, 
                                     Converter={StaticResource intToBool}}" />
 
         <ActivityIndicator x:Name="activityIndicator"
                            VerticalOptions="CenterAndExpand"
-                           IsVisible="False" IsRunning="False" />
+                           IsVisible="False" />
 
         <!--Search result view-->
         <ListView x:Name="listView"
-                  SeparatorVisibility="None" ItemSelected="OnItemSelected">
+                  SeparatorVisibility="None"
+                  ItemSelected="OnItemSelected">
             <ListView.RowHeight>
                 <OnPlatform x:TypeArguments="x:Int32" 
                             iOS="80" 
