@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:local="clr-namespace:MeetAndGit"
-             xmlns:helper="clr-namespace:MeetAndGit.Helpers"
+			 xmlns:helper="clr-namespace:MeetAndGit.Helpers"
 			 x:Class="MeetAndGit.MainPage"
-             Title="Meet and Git">
+			 Title="Meet and Git">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <helper:IntToBoolConverter x:Key="intToBool" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<helper:IntToBoolConverter x:Key="intToBool" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
 
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
@@ -20,74 +20,103 @@
 	</ContentPage.Padding>
 
 	<StackLayout>
+		<StackLayout.Padding>
+			<OnPlatform x:TypeArguments="Thickness"
+					iOS="0, 5, 0, 0"
+					Android="0, 5, 0, 0"
+					WinPhone="0, 5, 0, 0" />
+		</StackLayout.Padding>
+		
+		<!--Styles-->
+		<StackLayout.Resources>
+			<ResourceDictionary>
+				<Style TargetType="Entry">
+					<Setter Property="HorizontalOptions" Value="FillAndExpand" />
+				</Style>
+
+				<Style TargetType="Image">
+					<Setter Property="VerticalOptions" Value="Center" />
+				</Style>
+				<Style TargetType="Label">
+					<Setter Property="VerticalOptions" Value="CenterAndExpand" />
+					<Setter Property="FontAttributes" Value="Italic" />
+				</Style>
+			</ResourceDictionary>
+		</StackLayout.Resources>
+
 		<!--Entry StackLayout-->
 		<StackLayout Orientation="Horizontal">
-			<StackLayout.Resources>
-				<ResourceDictionary>
-					<Style TargetType="Entry">
-						<Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                    </Style>
-                    
-                    <Style TargetType="Image">
-                        <Setter Property="VerticalOptions" Value="Center" />
-                    </Style>
-                </ResourceDictionary>
-			</StackLayout.Resources>
 
-            <Entry x:Name="locEntry" 
-				Placeholder="Location" Text="" />
+			<Entry x:Name="locEntry" 
+				   Placeholder="Location" 
+				   Text="" />
 
-            <Entry x:Name="langEntry"
-				   Placeholder="Language" Text="" />
+			<Entry x:Name="langEntry"
+				   Placeholder="Language" 
+				   Text="" />
 		</StackLayout>
 
 		<!--Search Button-->
 		<Button x:Name="searchBtn"
 				Text="Search"
 				VerticalOptions="Center"
-                Clicked="OnButtonClicked" 
-                IsEnabled="{Binding Source={x:Reference langEntry}, 
-                                    Path=Text.Length, 
-                                    Converter={StaticResource intToBool}}" />
+				Clicked="OnButtonClicked" 
+				TextColor="Accent">
+			<Button.Triggers>
+				<MultiTrigger TargetType="Button">
+					<MultiTrigger.Conditions>
+						<BindingCondition Binding="{Binding Source={x:Reference locEntry},
+															Path=Text.Length}"
+										  Value="0" />
 
-        <ActivityIndicator x:Name="activityIndicator"
-                           VerticalOptions="CenterAndExpand"
-                           IsVisible="False" />
+						<BindingCondition Binding="{Binding Source={x:Reference langEntry},
+															Path=Text.Length}"
+										  Value="0" />
+					</MultiTrigger.Conditions>
 
-        <!--Search result view-->
-        <ListView x:Name="listView"
-                  SeparatorVisibility="None"
-                  ItemSelected="OnItemSelected">
-            <ListView.RowHeight>
-                <OnPlatform x:TypeArguments="x:Int32" 
-                            iOS="80" 
-                            Android="80" 
-                            WinPhone="90" />
-            </ListView.RowHeight>
-            
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ContentView Padding="5">
-                            <Frame OutlineColor="Accent"
-                                   Padding="10">
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding Path=Avatar_Url}"
-                                       HeightRequest="50"
-                                       WidthRequest="50" />
-                                    <StackLayout>
-                                        <Label Text="{Binding Login, 
-                                        StringFormat='Username: {0}'}"
-                                               VerticalOptions="CenterAndExpand" 
-                                               FontAttributes="Bold,Italic" />
-                                    </StackLayout>
-                                </StackLayout>
-                            </Frame>
-                        </ContentView>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+					<Setter Property="IsEnabled" Value="False" />
+				</MultiTrigger>
+			</Button.Triggers>
+		</Button>
+
+		<ActivityIndicator x:Name="activityIndicator"
+						   VerticalOptions="CenterAndExpand"
+						   IsVisible="False" />
+
+		<!--Search result view-->
+		<ListView x:Name="listView"
+				  SeparatorVisibility="None"
+				  ItemSelected="OnItemSelected">
+			<ListView.RowHeight>
+				<OnPlatform x:TypeArguments="x:Int32" 
+							iOS="80" 
+							Android="80" 
+							WinPhone="90" />
+			</ListView.RowHeight>
+			
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<ContentView Padding="5">
+							<Frame OutlineColor="Accent"
+								   Padding="10">
+								<StackLayout Orientation="Horizontal">
+									<Image Source="{Binding Path=Avatar_Url}"
+									   HeightRequest="50"
+									   WidthRequest="50" />
+									<StackLayout>
+										<Label Text="{Binding Login, 
+															  StringFormat='Username: {0}'}" />
+										<Label Text="{Binding Score,
+															  StringFormat='Score: {0}'}" />
+									</StackLayout>
+								</StackLayout>
+							</Frame>
+						</ContentView>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</StackLayout>
 
 </ContentPage>

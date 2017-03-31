@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,6 +11,8 @@ namespace MeetAndGit.Views
         public DetailsPage()
         {
             InitializeComponent();
+
+            NavigationPage.SetBackButtonTitle(this, "Return");
         }
 
         void OnPageSizeChanged(object sender, EventArgs args)
@@ -37,6 +35,13 @@ namespace MeetAndGit.Views
                 Grid.SetRow(detailsStack, 0);
                 Grid.SetColumn(detailsStack, 1);
             }
+        }
+
+        void OnUrlLabelTapped(object sender, EventArgs args)
+        {
+            var url = ((Label)sender).Text;
+
+            Device.OpenUri(new Uri(url));
         }
     }
 }

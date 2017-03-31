@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Data\UsersManager.cs" />
+    <Compile Include="Helpers\ImageResourceExtension.cs" />
     <Compile Include="Helpers\IntToBoolConverter.cs" />
     <Compile Include="Helpers\StringToTitleConverter.cs" />
     <Compile Include="Models\UserInfo.cs" />
@@ -107,6 +108,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\ic_group.png" />
+    <EmbeddedResource Include="Images\ic_group_add.png" />
+    <EmbeddedResource Include="Images\ic_group_add_white.png" />
+    <EmbeddedResource Include="Images\ic_group_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

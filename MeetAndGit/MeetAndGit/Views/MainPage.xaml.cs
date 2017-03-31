@@ -34,6 +34,11 @@ namespace MeetAndGit
             {
                 errorMessage = exc.Message;
             }
+
+            if (errorMessage !=  null)
+            {
+                await DisplayAlert("An Error Occured", $"{errorMessage}", "Ok");
+            }
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -53,6 +58,11 @@ namespace MeetAndGit
                 catch (Exception exc)
                 {
                     errorMessage = exc.Message;
+                }
+
+                if (errorMessage != null)
+                {
+                    await DisplayAlert("An Error Occured", $"{errorMessage}", "Ok");
                 }
 
                 await Navigation.PushAsync(detailsPage);

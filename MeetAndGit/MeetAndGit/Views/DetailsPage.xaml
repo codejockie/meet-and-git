@@ -37,9 +37,39 @@
             <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
 
-        <Image Source="{Binding Avatar_Url}"
-               Grid.Row="0" Grid.Column="0" />
+        <StackLayout 
+            Grid.Row="0" Grid.Column="0">
+            <Image Source="{Binding Avatar_Url}" />
+            <Grid>
+                <!--Grid Styles-->
+                <Grid.Resources>
+                    <ResourceDictionary>
+                        <Style TargetType="Label">
+                            <Setter Property="VerticalOptions" Value="Center" />
+                            <Setter Property="FontSize" Value="Small" />
+                        </Style>
 
+                        <Style TargetType="Image">
+                            <Setter Property="BackgroundColor" Value="Accent" />
+                        </Style>
+                    </ResourceDictionary>
+                </Grid.Resources>
+                
+                <StackLayout Orientation="Horizontal"
+                             Grid.Row="0" Grid.Column="0">
+                    <Image Source="{helper:ImageResource MeetAndGit.Images.ic_group_white.png}" />
+                    <Label Text="{Binding Followers}" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal"
+                             Grid.Row="0" Grid.Column="1">
+                    <Image Source="{helper:ImageResource MeetAndGit.Images.ic_group_add_white.png}" />
+                    <Label Text="{Binding Following}" />
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+
+        <!--ScrollView StackLayout-->
         <ScrollView x:Name="detailsStack"
                     Grid.Row="1" Grid.Column="0">
             <StackLayout>
@@ -50,7 +80,15 @@
                 <Label Text="{Binding Email, StringFormat='Email: {0}' }" />
                 <Label Text="{Binding Location, StringFormat='Location: {0}' }" />
                 <Label Text="{Binding Company, StringFormat='Company: {0}' }" />
-                <Label Text="{Binding Blog, StringFormat='Blog: {0}' }" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Blog: " />
+                    <Label TextColor="Blue"
+                           Text="{Binding Blog}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnUrlLabelTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
                 <Label Text="{Binding Bio, StringFormat='Bio: {0}' }" />
             </StackLayout>
         </ScrollView>
